@@ -16,8 +16,19 @@ void ATankPlayerController::BeginPlay()
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("PlayerController is posessing: %s"), *(controlledTank->GetName()));
-
 	}
+}
+
+void ATankPlayerController::Tick(float deltaSeconds)
+{
+	Super::Tick(deltaSeconds);
+	AimTowardsCrosshair();
+	UE_LOG(LogTemp, Warning, TEXT("Tick"));
+}
+
+void ATankPlayerController::AimTowardsCrosshair()
+{
+	if (!GetControlledTank()) return;
 }
 
 ATank* ATankPlayerController::GetControlledTank() const
