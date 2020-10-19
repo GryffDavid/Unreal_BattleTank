@@ -23,16 +23,28 @@ void ATankPlayerController::Tick(float deltaSeconds)
 {
 	Super::Tick(deltaSeconds);
 	AimTowardsCrosshair();
-	UE_LOG(LogTemp, Warning, TEXT("Tick"));
+	//UE_LOG(LogTemp, Warning, TEXT("Tick"));
 }
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
 	if (!GetControlledTank()) return;
+
+	FVector HitLocation;
+	if (GetSightRayHitLocation(HitLocation))
+	{		
+		UE_LOG(LogTemp, Warning, TEXT("HitLocation:%s"), *HitLocation.ToString());
+	}
 }
 
 ATank* ATankPlayerController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
+}
+
+bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) const
+{
+	OutHitLocation = FVector(3.0f, 6.0f, 9.0f);
+	return true;
 }
 

@@ -21,4 +21,5 @@ public:
 	void BeginPlay() override;
 	void Tick(float deltaSeoonds) override;
 	void AimTowardsCrosshair();
+	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 };
