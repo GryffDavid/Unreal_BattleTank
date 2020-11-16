@@ -22,10 +22,6 @@ public:
 
 	void Tick(float deltaSeconds) override;
 
-	ATank* GetControlledTank() const;
-
-	ATank* GetPlayerTank() const;
-
-	
-	
+	ATank* ControlledTank;
+	ATank* PlayerTank;
 };

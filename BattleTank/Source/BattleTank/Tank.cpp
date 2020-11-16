@@ -21,10 +21,14 @@ void ATank::Fire()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Fire!"));
 
-	if (!Barrel) return;
+	bool isReloaded = (GetWorld()->GetTimeSeconds() - LastFireTime) > ReloadTime;
 
-	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation("ProjectileSocket"), Barrel->GetSocketRotation("Projectile Socket"));
-	Projectile->LaunchProjectile(LaunchSpeed);	
+	if (Barrel && isReloaded)
+	{
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation("ProjectileSocket"), Barrel->GetSocketRotation("Projectile Socket"));
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = GetWorld()->GetTimeSeconds();
+	}
 }
 
 // Sets default values
