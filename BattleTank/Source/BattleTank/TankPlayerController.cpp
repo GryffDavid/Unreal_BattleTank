@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "Tank.h"
 #include "TankPlayerController.h"
 
 void ATankPlayerController::BeginPlay()
@@ -23,7 +23,6 @@ void ATankPlayerController::Tick(float deltaSeconds)
 {
 	Super::Tick(deltaSeconds);
 	AimTowardsCrosshair();
-	//UE_LOG(LogTemp, Warning, TEXT("Tick"));
 }
 
 void ATankPlayerController::AimTowardsCrosshair()
@@ -32,8 +31,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 	FVector HitLocation;
 	if (GetSightRayHitLocation(HitLocation))
-	{		
-		//UE_LOG(LogTemp, Warning, TEXT("HitLocation:%s"), *HitLocation.ToString());
+	{
 		GetControlledTank()->AimAt(HitLocation);
 	}
 }
@@ -51,15 +49,13 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 
 	GetViewportSize(viewPortSizeX, viewPortSizeY);
 	auto ScreenLocation = FVector2D(viewPortSizeX * CrosshairXLocation, viewPortSizeY * CrosshairYLocation);
-	//UE_LOG(LogTemp, Warning, TEXT("ScreenLocation:%s"), *ScreenLocation.ToString());
 
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
 		GetLookVectorHitLocation(LookDirection, OutHitLocation);
 	}
-	//UE_LOG(LogTemp, Warning, TEXT("worldDirection:%s"), *LookDirection.ToString());
-	//UE_LOG(LogTemp, Warning, TEXT("OutHitLocation:%s"), *OutHitLocation.ToString());
+
 	return true;
 }
 
@@ -81,6 +77,7 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector lookdirection, FVec
 		return true;
 	}
 
+	OUThitLocation = FVector(0);
 	return false;
 }
 
