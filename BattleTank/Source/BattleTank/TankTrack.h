@@ -20,7 +20,7 @@ public:
 
 	//Force on this track in newtons
 	UPROPERTY(EditDefaultsOnly, Category = "Track")
-	float MaxTrackDrivingForce = 400000;
+	float MaxTrackDrivingForce = 40000000;
 
 //private:
 	
