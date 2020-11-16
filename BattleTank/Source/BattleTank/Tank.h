@@ -25,6 +25,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetTurretReference(UTankTurret* turretToSet);
 
+	UFUNCTION(BlueprintCallable, Category = Firing)
+		void Fire();
+
 private:
 	// Sets default values for this pawn's properties
 	ATank();
