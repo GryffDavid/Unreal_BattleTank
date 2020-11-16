@@ -23,7 +23,8 @@ void ATank::Fire()
 
 	if (!Barrel) return;
 
-	GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation("ProjectileSocket"), Barrel->GetSocketRotation("Projectile Socket"));
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation("ProjectileSocket"), Barrel->GetSocketRotation("Projectile Socket"));
+	Projectile->LaunchProjectile(LaunchSpeed);	
 }
 
 // Sets default values
