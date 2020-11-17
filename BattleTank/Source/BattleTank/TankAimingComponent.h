@@ -8,6 +8,14 @@
 #include "Kismet/GameplayStatics.h"
 #include "TankAimingComponent.generated.h"
 
+UENUM()
+enum class EAimingState : uint8
+{
+	Aiming,
+	Locked,
+	Reloading
+};
+
 class UTankBarrel;
 class UTankTurret;
 
@@ -16,16 +24,18 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
-	// Sets default values for this component's properties
-	UTankAimingComponent();
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = State)
+	EAimingState AimState = EAimingState::Aiming;
 
-public:	
+public:
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void Initialise(UTankBarrel* barrel, UTankTurret* turret);
 	void AimAt(FVector hitLocation, float launchSpeed);
-	void SetBarrelReference(UTankBarrel* barrelToSet);
-	void SetTurretReference(UTankTurret* turretToSet);
 
 private:
+	UTankAimingComponent();
+
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
 	
