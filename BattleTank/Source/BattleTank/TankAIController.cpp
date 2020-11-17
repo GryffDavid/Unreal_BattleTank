@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Tank.h"
 #include "TankAIController.h"
+#include "Tank.h"
+
 
 void ATankAIController::BeginPlay()
 {
@@ -20,6 +21,8 @@ void ATankAIController::Tick(float deltaSeconds)
 		//Move towards player
 		//Aim at player
 		//Shoot at player
+
+		MoveToActor(PlayerTank, 3000);
 		ControlledTank->AimAt(PlayerTank->GetActorLocation());
 		//ControlledTank->Fire();
 	}	

@@ -25,3 +25,15 @@ void UTankMovementComponent::Initialise(UTankTrack* leftTrack, UTankTrack* right
 	LeftTrack = leftTrack;
 	RightTrack = rightTrack;
 }
+
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	//Don't call super. Replacing functionality.
+	auto tankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
+	auto vectorToPlayer = MoveVelocity.GetSafeNormal();
+
+	float throttleValue = FVector::DotProduct(tankForward, vectorToPlayer);
+
+	IntendMoveForward(throttleValue);
+	//UE_LOG(LogTemp, Warning, TEXT("%s vectoring towards %s"), *tankName, *moveVelocityString);
+}

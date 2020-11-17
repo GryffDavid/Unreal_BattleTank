@@ -24,4 +24,7 @@ public:
 
 	ATank* ControlledTank;
 	ATank* PlayerTank;
+
+	UPROPERTY(BlueprintReadOnly, Category = AI)
+	float AcceptanceRadius = 3000;
 };
