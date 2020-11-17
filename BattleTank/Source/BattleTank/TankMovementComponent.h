@@ -23,12 +23,12 @@ public:
 	void IntendRotateClockwise(float Rotate);
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void Initialise(UTankTrack* leftTrack, UTankTrack* rightTrack);
-
-	void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
+	void Initialise(UTankTrack* leftTrack, UTankTrack* rightTrack);	
 
 private:
 	UTankTrack* LeftTrack = nullptr;
 	UTankTrack* RightTrack = nullptr;
+
+	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 
 };

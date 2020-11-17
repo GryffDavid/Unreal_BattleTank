@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "TankMovementComponent.h"
 #include "TankTrack.h"
 
@@ -29,17 +28,13 @@ void UTankMovementComponent::Initialise(UTankTrack* leftTrack, UTankTrack* right
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
 {
 	//Don't call super. Replacing functionality.
+
 	auto tankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
 	auto vectorToPlayer = MoveVelocity.GetSafeNormal();
 
 	float throttleValue = FVector::DotProduct(tankForward, vectorToPlayer);
-
 	auto rightThrow = FVector::CrossProduct(tankForward, vectorToPlayer).Z;
 
 	IntendRotateClockwise(rightThrow);
-
-	
-
-	//IntendMoveForward(throttleValue);
-	//UE_LOG(LogTemp, Warning, TEXT("%s vectoring towards %s"), *tankName, *moveVelocityString);
+	IntendMoveForward(throttleValue);
 }
