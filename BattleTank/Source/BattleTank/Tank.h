@@ -9,7 +9,6 @@
 class UTankBarrel;
 class UTankTurret;
 class UTankAimingComponent;
-class UTankMovementComponent;
 class AProjectile;
 
 UCLASS()
@@ -19,6 +18,7 @@ class BATTLETANK_API ATank : public APawn
 
 public:
 	void AimAt(FVector hitLocation);
+	void BeginPlay();
 
 	UFUNCTION(BlueprintCallable, Category = Firing)
 	void Fire();
@@ -45,6 +45,4 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, Category = Movement)
-	UTankMovementComponent* TankMovementComponent = nullptr;
 };

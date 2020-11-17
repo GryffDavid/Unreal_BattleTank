@@ -26,7 +26,7 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = State)
-	EAimingState AimState = EAimingState::Aiming;
+	EAimingState AimState = EAimingState::Locked;
 
 public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
