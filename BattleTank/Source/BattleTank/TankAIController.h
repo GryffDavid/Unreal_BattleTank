@@ -26,5 +26,5 @@ public:
 	ATank* PlayerTank;
 
 	UPROPERTY(BlueprintReadOnly, Category = AI)
-	float AcceptanceRadius = 3000;
+	float AcceptanceRadius = 1000;
 };

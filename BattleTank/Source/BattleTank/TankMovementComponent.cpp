@@ -34,6 +34,12 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 
 	float throttleValue = FVector::DotProduct(tankForward, vectorToPlayer);
 
-	IntendMoveForward(throttleValue);
+	auto rightThrow = FVector::CrossProduct(tankForward, vectorToPlayer).Z;
+
+	IntendRotateClockwise(rightThrow);
+
+	
+
+	//IntendMoveForward(throttleValue);
 	//UE_LOG(LogTemp, Warning, TEXT("%s vectoring towards %s"), *tankName, *moveVelocityString);
 }
