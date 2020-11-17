@@ -6,14 +6,22 @@
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
+	if (!LeftTrack || !RightTrack) return;
+
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
 }
 
+void UTankMovementComponent::IntendRotateClockwise(float Rotate)
+{
+	if (!LeftTrack || !RightTrack) return;
+
+	LeftTrack->SetThrottle(Rotate);
+	RightTrack->SetThrottle(-Rotate);
+}
+
 void UTankMovementComponent::Initialise(UTankTrack* leftTrack, UTankTrack* rightTrack)
 {
-	if (!leftTrack || !rightTrack) return;
-
 	LeftTrack = leftTrack;
 	RightTrack = rightTrack;
 }

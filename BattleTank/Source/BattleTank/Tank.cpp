@@ -20,7 +20,7 @@ void ATank::SetTurretReference(UTankTurret* turretToSet)
 
 void ATank::Fire()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Fire!"));
+	//UE_LOG(LogTemp, Warning, TEXT("Fire!"));
 
 	bool isReloaded = (GetWorld()->GetTimeSeconds() - LastFireTime) > ReloadTime;
 
