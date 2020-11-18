@@ -19,6 +19,7 @@ public:
 	void BeginPlay() override;
 	void Tick(float deltaSeconds) override;
 
-	UPROPERTY(BlueprintReadOnly, Category = AI)
-	float AcceptanceRadius = 2000;
+protected:
+	UPROPERTY(EditAnywhere, Category = AI)
+	float AcceptanceRadius = 8000;
 };

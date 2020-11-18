@@ -40,6 +40,8 @@ public:
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	void AimAt(FVector hitLocation);
+
+	EAimingState GetAimState() const;
 	
 private:
 	virtual void BeginPlay() override;

@@ -78,6 +78,11 @@ void UTankAimingComponent::AimAt(FVector hitLocation)
 	}
 }
 
+EAimingState UTankAimingComponent::GetAimState() const
+{
+	return AimState;
+}
+
 void UTankAimingComponent::Fire()
 {
 	if (AimState != EAimingState::Reloading)
@@ -99,7 +104,11 @@ void UTankAimingComponent::MoveBarrelTowards(FVector aimDirection)
 	auto DeltaRotation = AimAsRotation - BarrelRotation;
 
 	Barrel->Elevate(DeltaRotation.Pitch);
-	Turret->Rotate(DeltaRotation.Yaw);
+
+	if (FMath::Abs(DeltaRotation.Yaw) < 180)
+		Turret->Rotate(DeltaRotation.Yaw);
+	else
+		Turret->Rotate(-DeltaRotation.Yaw);
 }
 
 
