@@ -9,15 +9,18 @@
 void ATank::BeginPlay()
 {	
 	Super::BeginPlay();
+
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 void ATank::Fire()
 {
-	//UE_LOG(LogTemp, Warning, TEXT("Fire!"));
+	if (!ensure(Barrel)) return;
 
 	bool isReloaded = (GetWorld()->GetTimeSeconds() - LastFireTime) > ReloadTime;
+	UE_LOG(LogTemp, Warning, TEXT("Fire!"));
 
-	if (ensure(Barrel && isReloaded))
+	if (isReloaded)
 	{
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation("ProjectileSocket"), Barrel->GetSocketRotation("Projectile Socket"));
 		Projectile->LaunchProjectile(LaunchSpeed);
