@@ -18,11 +18,21 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void SetThrottle(float throttle);
 
+	void DriveTrack();
+
 	//Force on this track in newtons
 	UPROPERTY(EditDefaultsOnly, Category = "Track")
 	float MaxTrackDrivingForce = 40000000;
 
 private:
 	UTankTrack();
-	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+
+	virtual void BeginPlay() override;
+
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+
+	void ApplySidewaysForce();
+
+	float CurrentThrottle = 0;
 };
