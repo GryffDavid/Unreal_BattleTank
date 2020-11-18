@@ -7,8 +7,6 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-class ATank;
-
 /**
  * 
  */
@@ -19,11 +17,7 @@ class BATTLETANK_API ATankAIController : public AAIController
 
 public:
 	void BeginPlay() override;
-
 	void Tick(float deltaSeconds) override;
-
-	ATank* ControlledTank;
-	ATank* PlayerTank;
 
 	UPROPERTY(BlueprintReadOnly, Category = AI)
 	float AcceptanceRadius = 2000;

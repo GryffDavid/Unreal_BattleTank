@@ -10,7 +10,6 @@
  * 
  */
 
-class ATank;
 class UTankAimingComponent;
 
 UCLASS()
@@ -19,12 +18,8 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 
 protected:
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	ATank* GetControlledTank() const;
-
 	UFUNCTION(BlueprintImplementableEvent, Category =Setup)
 	void FoundAimingComponent(UTankAimingComponent* AimingComponentReference);
-
 
 private:	
 	void BeginPlay() override;
@@ -35,8 +30,8 @@ private:
 	bool GetLookVectorHitLocation(FVector lookdirection, FVector& OUThitLocation) const;
 	
 	UPROPERTY(EditAnywhere)
-		float CrosshairXLocation = 0.5, CrosshairYLocation = 1.0 / 3.0;
+	float CrosshairXLocation = 0.5, CrosshairYLocation = 1.0 / 3.0;
 
 	UPROPERTY(EditAnywhere)
-		float LineTraceRange = 1000000.0; //10km = 1,000,000 centimeters
+	float LineTraceRange = 1000000.0; //10km = 1,000,000 centimeters
 };
