@@ -8,8 +8,9 @@ AProjectile::AProjectile()
 	PrimaryActorTick.bCanEverTick = false;
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement"));
-	
-	CollisionMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Collision Mesh"));
+	ProjectileMovement->bAutoActivate = false;
+
+	CollisionMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Collision Mesh"));	
 	SetRootComponent(CollisionMesh);
 	CollisionMesh->SetNotifyRigidBodyCollision(true);
 	CollisionMesh->SetVisibility(false);
@@ -21,7 +22,8 @@ AProjectile::AProjectile()
 	ImpactBlast->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	ImpactBlast->SetAutoActivate(false);
 
-	ProjectileMovement->bAutoActivate = false;
+	ExplosionForce = CreateDefaultSubobject<URadialForceComponent>(FName("Explosion Force"));
+	ExplosionForce->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 // Called when the game starts or when spawned
@@ -34,15 +36,14 @@ void AProjectile::BeginPlay()
 
 void AProjectile::LaunchProjectile(float launchSpeed)
 {
-	//ProjectileMovement->
 	ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * launchSpeed);
 	ProjectileMovement->Activate();
 }
 
 void AProjectile::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, FVector NormalImpulse, const FHitResult & Hit)
-{
-	UE_LOG(LogTemp, Warning, TEXT("PROJECTILE HIT"));
+{	
+	ExplosionForce->FireImpulse();
 	LaunchBlast->Deactivate();
-	ImpactBlast->Activate();
+	ImpactBlast->Activate();	
 }
 
