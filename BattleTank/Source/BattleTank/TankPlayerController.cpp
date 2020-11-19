@@ -9,8 +9,7 @@ void ATankPlayerController::BeginPlay()
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 
 	if (!ensure(AimingComponent)) return;
-	FoundAimingComponent(AimingComponent);
-	
+	FoundAimingComponent(AimingComponent);	
 }
 
 void ATankPlayerController::Tick(float deltaSeconds)
@@ -30,11 +29,8 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 	bool bGotHitLocation = GetSightRayHitLocation(HitLocation);
 
-	
-
 	if (bGotHitLocation)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("TRUE"), bGotHitLocation);
 		AimingComponent->AimAt(HitLocation);
 	}
 }
