@@ -30,7 +30,9 @@ void UTankAimingComponent::BeginPlay()
 
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
-	if ((GetWorld()->GetTimeSeconds() - LastFireTime) < ReloadTime)
+	if (AmmoLeft == 0)
+		AimState = EAimingState::OutOfAmmo;
+	else if ((GetWorld()->GetTimeSeconds() - LastFireTime) < ReloadTime)
 	{
 		AimState = EAimingState::Reloading;
 	}
@@ -42,6 +44,8 @@ void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickTy
 	{
 		AimState = EAimingState::Locked;
 	}
+	
+	
 }
 
 void UTankAimingComponent::Initialise(UTankBarrel* barrel, UTankTurret* turret)
@@ -83,15 +87,22 @@ EAimingState UTankAimingComponent::GetAimState() const
 	return AimState;
 }
 
+int UTankAimingComponent::GetAmmoLeft() const
+{
+	return AmmoLeft;
+}
+
 void UTankAimingComponent::Fire()
 {
-	if (AimState != EAimingState::Reloading)
+	if (AimState != EAimingState::Reloading && GetAmmoLeft() > 0)
 	{
 		if (!ensure(Barrel && ProjectileBlueprint)) return;
 		//UE_LOG(LogTemp, Warning, TEXT("Fire!"));
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation("ProjectileSocket"), Barrel->GetSocketRotation("Projectile Socket"));
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = GetWorld()->GetTimeSeconds();
+
+		AmmoLeft--;
 	}
 }
 
