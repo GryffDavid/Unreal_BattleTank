@@ -62,13 +62,13 @@ private:
 	FVector AimDirection;
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
-	float LaunchSpeed = 4000;
+	float LaunchSpeed = 10000;
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float ReloadTime = 3.0f;
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
-	int32 AmmoLeft = 3;
+	int32 AmmoLeft = 25;
 
 	double LastFireTime = 0.0;
 };
