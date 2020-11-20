@@ -15,6 +15,9 @@ public:
 	void BeginPlay();
 	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
+	UFUNCTION(BlueprintPure, Category = Health)
+	float GetHealthPercent() const;
+
 private:
 	// Sets default values for this pawn's properties
 	ATank();	
