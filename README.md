@@ -5,3 +5,4 @@ Simple tank battle game to familiarise myself the Unreal Editor and Unreal C++ s
 - Aim the turret on the tank and shoot at other tanks on the terrain
 - Some simple AI that finds the player tank, aims towards it and shoots
 - AI and player tank are controlled using the same methods
+- NOT POLISHED
